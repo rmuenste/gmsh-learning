@@ -1,0 +1,5 @@
+  gmsh-env/
+  __pycache__/
+  *.msh
+  *.log
+  msgs
