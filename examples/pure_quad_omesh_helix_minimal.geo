@@ -10,8 +10,8 @@ rtube  =  2.5;    // tube radius
 Pturn  =  7.0;    // pitch per full turn
 
 // Angular range parameters
-start_angle_deg = 20.0;     // Start angle in degrees
-end_angle_deg = 160.0;     // End angle in degrees
+start_angle_deg = 45.0;     // Start angle in degrees
+end_angle_deg = 135.0;     // End angle in degrees
 
 // Convert to radians and calculate axial rise
 start_angle = start_angle_deg * Pi/180;
@@ -22,7 +22,7 @@ dz = (Pturn / (2*Pi)) * angular_span;
 // Mesh parameters
 nCirc  = 1;      // cells around circumference (ultra-coarse)
 nRad   = 1;      // cells centre->wall (ultra-coarse)
-nAxial = 20;     // layers along sweep
+nAxial = 50;     // layers along sweep
 ratioR = 1.0;    // radial grading
 lc     = rtube/10;
 
@@ -371,3 +371,6 @@ Printf("✓ Generated MINIMAL pure quad O-mesh helical tube");
 Printf("✓ %g surfaces per cross-section with ultra-coarse mesh", #all_surfaces[]);
 Printf("✓ %g layers over %g° span", nAxial, angular_span*180/Pi);
 Printf("✓ Mesh parameters: nCirc=%g, nRad=%g (minimal CFD-compatible)", nCirc, nRad);
+
+// Export mesh to VTK for visualization
+Save "examples/pure_quad_omesh_helix_minimal.vtk";
