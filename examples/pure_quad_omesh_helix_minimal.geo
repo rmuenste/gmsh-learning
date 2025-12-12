@@ -372,5 +372,6 @@ Printf("✓ %g surfaces per cross-section with ultra-coarse mesh", #all_surfaces
 Printf("✓ %g layers over %g° span", nAxial, angular_span*180/Pi);
 Printf("✓ Mesh parameters: nCirc=%g, nRad=%g (minimal CFD-compatible)", nCirc, nRad);
 
-// Export mesh to VTK for visualization
-Save "examples/pure_quad_omesh_helix_minimal.vtk";
+// Export mesh to VTK for visualization (write only 3D elements)
+Mesh.SaveAll = 0;
+Save "../output/pure_quad_omesh_helix_minimal.vtk";
