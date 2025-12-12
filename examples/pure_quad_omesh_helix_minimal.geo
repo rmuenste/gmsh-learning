@@ -10,8 +10,8 @@ rtube  =  2.5;    // tube radius
 Pturn  =  7.0;    // pitch per full turn
 
 // Angular range parameters
-start_angle_deg = 0.0;     // Start angle in degrees
-end_angle_deg = 180.0;     // End angle in degrees
+start_angle_deg = 20.0;     // Start angle in degrees
+end_angle_deg = 160.0;     // End angle in degrees
 
 // Convert to radians and calculate axial rise
 start_angle = start_angle_deg * Pi/180;
@@ -352,8 +352,12 @@ all_surfaces[] += {950, 954, 955, 956, 957, 958, 959, 960, 961, 962, 963, 964}; 
 
 Printf("Extruding %g MINIMAL surfaces over %g° with %g layers", #all_surfaces[], angular_span*180/Pi, nAxial);
 
+// Apply start angle by rotating the entire cross-section before helical sweep
+Rotate {{0,0,1}, {0,0,0}, start_angle} { Surface{all_surfaces[]}; }
+
 // Helical twist extrusion around Z-axis
-Extrude { {0,0,dz}, {0,0,0}, angular_span } { 
+// Use 4-argument twist form: translation, axis direction, axis point, angle
+Extrude { {0,0,dz}, {0,0,1}, {0,0,0}, angular_span } { 
     Surface{all_surfaces[]}; 
     Layers{nAxial}; 
     Recombine; 

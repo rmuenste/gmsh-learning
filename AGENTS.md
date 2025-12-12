@@ -18,7 +18,7 @@
 # Key insights captured previously
 - Success hinges on transfinite meshing of all O-grid surfaces (outer, middle, center, transition) before twist extrusion; eliminates stray triangles and yields pure hexes.
 - Ultra-coarse feasible with nCirc=1, nRad=1; transfinite line counts set via nCirc/4+1 and nRad+1 to maintain quad topology.
-- Helical extrusion uses `Extrude { {0,0,dz}, {0,0,0}, angular_span } { Surface{all_surfaces[]}; Layers{nAxial}; Recombine; }` around the Z-axis where `dz=(Pturn/(2π))*angular_span`.
+- Helical extrusion now uses the 4-argument twist form to apply both rotation and pitch: `Extrude { {0,0,dz}, {0,0,1}, {0,0,0}, angular_span } { Surface{all_surfaces[]}; Layers{nAxial}; Recombine; }`, preceded by a `Rotate` by `start_angle` about z; dz still `=(Pturn/(2π))*angular_span`.
 
 # Open questions / next steps
 - Verify mesh quality/counts for higher-res `.msh` (e.g., `pure_quad_helix_fixed.msh`) and confirm absence of pyramids/tets.
