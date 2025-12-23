@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+"""
+Fit a fixed-radius sphere whose center is constrained to a helix centerline.
+
+Usage example:
+  python fit_sphere_centerline.py --ring_csv path/to/ring.csv --R 0.05 --Pturn 0.10 \
+    --r 0.012 --theta_min_deg 0 --theta_max_deg 180
+"""
 import argparse
 import csv
 import math

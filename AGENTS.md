@@ -15,6 +15,15 @@
 - Run higher-res geo: `gmsh examples/pure_quad_helix_fixed.geo -3 -o examples/pure_quad_helix_fixed.msh`
 - Python parametric: `python examples/atc_parametric_advanced.py -nopopup` (auto-generates several spans). Pure-quad Python: `python examples/atc_pure_quad_helix.py -nopopup`.
 
+# Utility: fit_sphere_centerline.py
+- Fits a fixed-radius sphere whose center lies on a helix centerline to a ring of points.
+- Required CSV columns: `vtkOriginalPointIds,Points:0,Points:1,Points:2`.
+- Required args: `--ring_csv --R --Pturn --r --theta_min_deg --theta_max_deg`
+- Optional: `--z0`, `--theta_center` (radians), `--theta_halfwidth_deg`, `--free_dx_max/--free_dy_max/--free_dz_max`,
+  `--project_csv` with `--project_out`.
+- Example:
+  `python fit_sphere_centerline.py --ring_csv path/to/ring.csv --R 0.05 --Pturn 0.10 --r 0.012 --theta_min_deg 0 --theta_max_deg 180`
+
 # Key insights captured previously
 - Success hinges on transfinite meshing of all O-grid surfaces (outer, middle, center, transition) before twist extrusion; eliminates stray triangles and yields pure hexes.
 - Ultra-coarse feasible with nCirc=1, nRad=1; transfinite line counts set via nCirc/4+1 and nRad+1 to maintain quad topology.
