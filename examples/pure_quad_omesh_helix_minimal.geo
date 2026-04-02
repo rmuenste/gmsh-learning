@@ -5,13 +5,18 @@
 SetFactory("Built-in");
 
 // ----- Geometric parameters -------------------------------------------------
-R      = 25.0;    // helix radius
-rtube  =  2.5;    // tube radius
-Pturn  =  7.0;    // pitch per full turn
-
-// Angular range parameters
-start_angle_deg = 45.0;     // Start angle in degrees
-end_angle_deg = 135.0;     // End angle in degrees
+// Use ONELAB constants so values can be overridden with `gmsh -setnumber ...`.
+DefineConstant[
+  R = {25.0, Name "ATC/Helix radius"},
+  rtube = {2.5, Name "ATC/Tube radius"},
+  Pturn = {7.0, Name "ATC/Pitch per turn"},
+  start_angle_deg = {45.0, Name "ATC/Start angle (deg)"},
+  end_angle_deg = {135.0, Name "ATC/End angle (deg)"},
+  nCirc = {1, Name "Mesh/Cells around circumference"},
+  nRad = {1, Name "Mesh/Cells radial"},
+  nAxial = {50, Name "Mesh/Axial layers"},
+  ratioR = {1.0, Name "Mesh/Radial grading"}
+];
 
 // Convert to radians and calculate axial rise
 start_angle = start_angle_deg * Pi/180;
@@ -20,10 +25,6 @@ angular_span = end_angle - start_angle;
 dz = (Pturn / (2*Pi)) * angular_span;
 
 // Mesh parameters
-nCirc  = 1;      // cells around circumference (ultra-coarse)
-nRad   = 1;      // cells centre->wall (ultra-coarse)
-nAxial = 50;     // layers along sweep
-ratioR = 1.0;    // radial grading
 lc     = rtube/10;
 
 Printf("Generating MINIMAL pure quad O-mesh helical tube:");
