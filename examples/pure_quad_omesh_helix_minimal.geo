@@ -9,9 +9,13 @@ R      = 25.0;    // helix radius
 rtube  =  2.5;    // tube radius
 Pturn  =  7.0;    // pitch per full turn
 
-// Angular range parameters
-start_angle_deg = 45.0;     // Start angle in degrees
-end_angle_deg = 135.0;     // End angle in degrees
+// Use ONELAB parameters so `gmsh -setnumber name value` can freeze these
+// defaults from the command line for reduced-span / reduced-layer runs.
+DefineConstant[
+    start_angle_deg = {45.0, Name "Parameters/start_angle_deg"},  // Start angle in degrees
+    end_angle_deg = {135.0, Name "Parameters/end_angle_deg"},     // End angle in degrees
+    nAxial = {50, Name "Parameters/nAxial"}                       // layers along sweep
+];
 
 // Convert to radians and calculate axial rise
 start_angle = start_angle_deg * Pi/180;
@@ -22,7 +26,6 @@ dz = (Pturn / (2*Pi)) * angular_span;
 // Mesh parameters
 nCirc  = 1;      // cells around circumference (ultra-coarse)
 nRad   = 1;      // cells centre->wall (ultra-coarse)
-nAxial = 50;     // layers along sweep
 ratioR = 1.0;    // radial grading
 lc     = rtube/10;
 
